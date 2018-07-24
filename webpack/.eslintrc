@@ -1,0 +1,37 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "mocha": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "plugins": [
+    "compat",
+    "chai-friendly"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
+  "rules": {
+    "compat/compat": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-arrow-callback": "error",
+    "arrow-parens": ["error", "always"],
+    "quotes": ["error", "backtick"],
+    "linebreak-style": ["error", "unix"],
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2
+  },
+  "globals": {
+    "expect": true
+  },
+  "settings": {
+    "polyfills": ["promises", "fetch"]
+  }
+}

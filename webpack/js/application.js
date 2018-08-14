@@ -1,7 +1,10 @@
-import { setHTMLClasses } from './html'
+import { effect } from './fun/effect'
+import { $, addClass, removeClass } from './html'
 
-export const application = {
-  start () {
-    setHTMLClasses()
-  }
-}
+const root = effect.of(`html`)
+  .chain($)
+
+const remove = root.ap(removeClass).run(`no-js`)
+const add = root.ap(addClass).run(`js`)
+
+export const application = effect.all([remove, add]).run()

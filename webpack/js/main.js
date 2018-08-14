@@ -1,4 +1,6 @@
 import '@babel/polyfill'
-import { application } from './application'
+import {
+  application
+} from './application'
 
-application.start()
+application.run()

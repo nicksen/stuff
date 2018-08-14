@@ -22,6 +22,6 @@ export const effect = (f) => ({
 
 effect.of = (val) => effect(() => val)
 
-effect.all = (...effects) => effect((x) => {
+effect.all = (effects) => effect((x) => {
   return effects.map((e) => e.run(x))
 })

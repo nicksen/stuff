@@ -70,4 +70,13 @@ describe(`effect`, () => {
 
     expect(actual).to.equal(expected)
   })
+
+  it(`should be able to run multiple effects`, () => {
+    const expected = [2, 4]
+    const one = effect.of(1).map(double)
+    const two = effect.of(2).map(double)
+    const actual = effect.all([one, two]).run()
+
+    expect(actual).to.deep.equal(expected)
+  })
 })

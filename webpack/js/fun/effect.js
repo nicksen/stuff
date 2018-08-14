@@ -1,27 +1,38 @@
-export const effect = (f) => ({
-  map (g) {
-    return effect((x) => g(f(x)))
-  },
+export function Effect (f) {
+  return {
+    map (g) {
+      return Effect((x) => g(f(x)))
+    },
 
-  run (x) {
-    return f(x)
-  },
+    run (x) {
+      return f(x)
+    },
 
-  join (x) {
-    return f(x)
-  },
+    join (x) {
+      return f(x)
+    },
 
-  chain (g) {
-    return effect(f).map(g).join()
-  },
+    chain (g) {
+      return Effect(f).map(g).join()
+    },
 
-  ap (ef) {
-    return ef.map((g) => g(f()))
+    ap (ef) {
+      // If someone calls `ap`, we assume `ef` has a function inside it (rather than a value).
+      // We'll use `map` to go inside off, and access that function (we'll call it 'g')
+      // Once we've got `g`, we apply the value inside off `f()` to it
+      return ef.map((g) => g(f()))
+    }
   }
-})
+}
 
-effect.of = (val) => effect(() => val)
+Effect.of = function of (val) {
+  return Effect(() => val)
+}
 
-effect.all = (effects) => effect((x) => {
-  return effects.map((e) => e.run(x))
-})
+Effect.all = function all (effects) {
+  return Effect(() => effects.map((ef) => ef.run()))
+}
+
+Effect.pipe = function pipe (...effects) {
+  return effects.reduce((acc, effect) => acc.ap(effect))
+}

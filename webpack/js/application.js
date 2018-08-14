@@ -1,10 +1,22 @@
-import { effect } from './fun/effect'
-import { $, addClass, removeClass } from './html'
+import {
+  Effect
+} from './fun/effect'
 
-const root = effect.of(`html`)
-  .chain($)
+const addClass = (node) => (cls) => {
+  node.classList.add(cls)
+  return node
+}
 
-const remove = root.ap(removeClass).run(`no-js`)
-const add = root.ap(addClass).run(`js`)
+const removeClass = (node) => (cls) => {
+  node.classList.remove(cls)
+  return node
+}
 
-export const application = effect.all([remove, add]).run()
+const $ = (selector) => Effect(() => document.querySelector(selector))
+
+export const application = Effect.pipe(
+  Effect.of(`html`),
+  Effect($).join(),
+  Effect(removeClass(`no-js`)),
+  Effect(addClass(`js`))
+)

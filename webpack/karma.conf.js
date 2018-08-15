@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Mon Jul 24 2017 22:03:54 GMT+0200 (CEST)
 
-const webpack = require(`./webpack.config.js`)[0]
+const webpack = require(`./webpack.config.js`)[1]
 
 module.exports = function (config) {
   config.set({

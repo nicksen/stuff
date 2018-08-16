@@ -32,7 +32,3 @@ Effect.of = function of (val) {
 Effect.all = function all (effects) {
   return Effect(() => effects.map((ef) => ef.run()))
 }
-
-Effect.pipe = function pipe (...effects) {
-  return effects.reduce((acc, effect) => acc.ap(effect))
-}

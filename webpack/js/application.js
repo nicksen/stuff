@@ -1,22 +1,20 @@
-import {
-  Effect
-} from './fun/effect'
+import { Effect } from './fun/effect'
+import { prop } from './fun/prop'
+import { curry } from './fun/curry'
 
-const addClass = (node) => (cls) => {
-  node.classList.add(cls)
-  return node
-}
-
-const removeClass = (node) => (cls) => {
-  node.classList.remove(cls)
-  return node
-}
+const add = curry((val, x) => {
+  x.add(val)
+  return x
+})
+const remove = curry((val, x) => {
+  x.remove(val)
+  return x
+})
 
 const $ = (selector) => Effect(() => document.querySelector(selector))
 
-export const application = Effect.pipe(
-  Effect.of(`html`),
-  Effect($).join(),
-  Effect(removeClass(`no-js`)),
-  Effect(addClass(`js`))
-)
+export const application = Effect.of(`html`)
+  .chain($)
+  .map(prop(`classList`))
+  .map(remove(`no-js`))
+  .map(add(`js`))

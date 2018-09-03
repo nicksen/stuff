@@ -1,10 +1,7 @@
-import {
-  path
-} from './path'
+import { path } from './path'
 
 describe(`path`, () => {
-  const deepObject = {a: {b: {c: `c`}}, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: [`arr`]
-  }
+  const deepObject = { a: { b: { c: `c` } }, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: [`arr`] }
 
   it(`'takes a path and an object and returns the value at the path or undefined'`, () => {
     const obj = {
@@ -38,7 +35,7 @@ describe(`path`, () => {
   it(`returns undefined for items not found`, () => {
     expect(path([`a`, `b`, `foo`], deepObject)).to.be.undefined
     expect(path([`bar`], deepObject)).to.be.undefined
-    expect(path([`a`, `b`], {a: null})).to.be.undefined
+    expect(path([`a`, `b`], { a: null })).to.be.undefined
   })
 
   it(`works with falsy items`, () => {

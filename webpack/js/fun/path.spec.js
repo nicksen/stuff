@@ -1,19 +1,19 @@
 import { path } from './path'
 
 describe(`path`, () => {
-  const deepObject = { a: { b: { c: `c` } }, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: [`arr`] }
+  const deepObject = {
+    a: { b: { c: `c` } },
+    falseVal: false,
+    nullVal: null,
+    undefinedVal: undefined,
+    arrayVal: [`arr`]
+  }
 
-  it(`'takes a path and an object and returns the value at the path or undefined'`, () => {
+  it(`takes a path and an object and returns the value at the path or undefined`, () => {
     const obj = {
       a: {
-        b: {
-          c: 100,
-          d: 200
-        },
-        e: {
-          f: [100, 101, 102],
-          g: `G`
-        },
+        b: { c: 100, d: 200 },
+        e: { f: [100, 101, 102], g: `G` },
         h: `H`
       },
       i: `I`,

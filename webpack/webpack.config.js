@@ -3,8 +3,6 @@ const md5 = require(`md5`)
 const webpack = require(`webpack`)
 const merge = require(`webpack-merge`)
 const MiniCssExtractPlugin = require(`mini-css-extract-plugin`)
-const UglifyJsPlugin = require(`uglifyjs-webpack-plugin`)
-const OptimizeCSSAssetsPlugin = require(`optimize-css-assets-webpack-plugin`)
 const CopyWebpackPlugin = require(`copy-webpack-plugin`)
 
 /**
@@ -232,21 +230,6 @@ const baseConfig = {
   },
 
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: false,
-        uglifyOptions: {
-          mangle: {
-            // Works around a Safari 10 bug:
-            // https://github.com/mishoo/UglifyJS2/issues/1753
-            safari10: true
-          }
-        }
-      }),
-      new OptimizeCSSAssetsPlugin()
-    ],
     splitChunks: {
       chunks: `all`
     },

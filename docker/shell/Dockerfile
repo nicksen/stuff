@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/ubuntu/
-FROM ubuntu:bionic
+FROM ubuntu:18.10
 
 # Locales
 ENV LANGUAGE en_US.UTF-8

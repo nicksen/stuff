@@ -1,3 +1,5 @@
+#!/usr/bin/env elixir
+
 defmodule Progress do
 
   @complete_character "█"

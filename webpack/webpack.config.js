@@ -54,7 +54,12 @@ const configurePlugins = (prefix) => {
         return chunk.name
       }
 
-      return `${prefix}~` + md5(Array.from(chunk.modulesIterable, (m) => m.identifier()).join()).slice(0, 10)
+      let hash = ``
+      for (const module of chunk.modulesIterable) {
+        hash += module.identifier()
+      }
+
+      return `${prefix}~` + md5(hash).slice(0, 10)
     })
   ]
 
@@ -87,6 +92,7 @@ const configureBabelLoader = (browsers) => {
           [`@babel/env`, {
             modules: false,
             useBuiltIns: `entry`,
+            corejs: `core-js@3`,
             targets: {
               browsers
             }

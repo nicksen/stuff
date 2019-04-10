@@ -118,7 +118,7 @@ const configureCssLoader = (browsers) => {
     plugins.push(
       require(`autoprefixer`)({
         grid: true,
-        browsers
+        overrideBrowserslist: browsers
       })
     )
 

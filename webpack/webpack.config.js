@@ -1,7 +1,7 @@
 const path = require(`path`)
 const md5 = require(`md5`)
 const webpack = require(`webpack`)
-const merge = require(`webpack-merge`)
+const { merge } = require(`webpack-merge`)
 const MiniCssExtractPlugin = require(`mini-css-extract-plugin`)
 const CopyWebpackPlugin = require(`copy-webpack-plugin`)
 
@@ -43,11 +43,12 @@ const configurePlugins = (prefix) => {
       filename: `../css/[name].css`
     }),
 
-    new CopyWebpackPlugin([{
-      from: `static/`,
-      to: `../`,
-      ignore: `.gitkeep`
-    }]),
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: `static/`,
+        to: `../`
+      }]
+    }),
 
     new webpack.NamedChunksPlugin((chunk) => {
       if (chunk.name != null) {

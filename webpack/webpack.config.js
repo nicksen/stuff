@@ -46,7 +46,7 @@ const configurePlugins = (prefix) => {
     new CopyWebpackPlugin([{
       from: `static/`,
       to: `../`,
-      ignore: `.gitkeep`
+      ignore: [`.gitkeep`]
     }]),
 
     new webpack.NamedChunksPlugin((chunk) => {

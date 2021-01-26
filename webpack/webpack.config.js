@@ -1,6 +1,4 @@
 const path = require(`path`)
-const md5 = require(`md5`)
-const webpack = require(`webpack`)
 const { merge } = require(`webpack-merge`)
 const MiniCssExtractPlugin = require(`mini-css-extract-plugin`)
 const CopyWebpackPlugin = require(`copy-webpack-plugin`)
@@ -48,31 +46,8 @@ const configurePlugins = (prefix) => {
         from: `static/`,
         to: `../`
       }]
-    }),
-
-    new webpack.NamedChunksPlugin((chunk) => {
-      if (chunk.name != null) {
-        return chunk.name
-      }
-
-      let hash = ``
-      for (const module of chunk.modulesIterable) {
-        hash += module.identifier()
-      }
-
-      return `${prefix}~` + md5(hash).slice(0, 10)
     })
   ]
-
-  if (isProduction) {
-    plugins.push(
-      new webpack.HashedModuleIdsPlugin()
-    )
-  } else {
-    plugins.push(
-      new webpack.NamedModulesPlugin()
-    )
-  }
 
   return plugins
 }
@@ -145,8 +120,9 @@ const configureCssLoader = (browsers) => {
       {
         loader: `postcss-loader`,
         options: {
-          ident: `postcss`,
-          plugins
+          postcssOptions: {
+            plugins
+          }
         }
       },
       `sass-loader`
